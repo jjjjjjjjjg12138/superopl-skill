@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "default": {
+      "api_key": "<SUPEROPL_API_KEY>",
+      "opl_id": "<OPL_ID>",
+      "user_login": "<NT_LOGIN>",
+      "user_name": "<DISPLAY_NAME>",
+      "base_url": "https://rb-superopl.emea.bosch.com"
+    }
+  },
+  "active_profile": "default",
+  "knowledge_base_path": "./knowledge_base"
+}

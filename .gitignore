@@ -1,0 +1,11 @@
+# Secrets
+product/superopl-skill/config/skill_config.json
+
+# Generated runtime artifacts
+product/superopl-skill/test-results/
+product/superopl-skill/knowledge_base/
+
+# Local/editor
+*.log
+.DS_Store
+Thumbs.db
