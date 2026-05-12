@@ -22,14 +22,16 @@ Keep behavior model-agnostic so the skill can be reused by different LLM agents:
 8. Use `scripts/run.ps1 -Intent knowledge-sync` for deduplicated knowledge snapshot and frequency rebuild.
 9. Use `scripts/run.ps1 -Intent knowledge-link` to infer Problem-Measure links.
 10. Use `scripts/run.ps1 -Intent knowledge-search` or `scripts/run.ps1 -Intent analyze` for historical analysis and recall (frequency + related measures + evidence trace).
-11. Use `scripts/run.ps1 -Intent knowledge-confirm` to add/remove/list manually confirmed Problem-Measure links.
-12. Use `scripts/run.ps1 -Intent analyze -Output table|json|markdown` based on downstream consumption (human read vs model chaining vs wiki writing).
-13. Keep llm-wiki artifacts updated via `knowledge-sync` and `knowledge-link` (pages/chunks/entities/edges/evidence/revisions).
+11. Before suggesting measures, inspect related task/problem `description` fields because many teams write containment/action details there instead of creating separate measure entries.
+12. Use `scripts/run.ps1 -Intent knowledge-confirm` to add/remove/list manually confirmed Problem-Measure links.
+13. Use `scripts/run.ps1 -Intent analyze -Output table|json|markdown` based on downstream consumption (human read vs model chaining vs wiki writing).
+14. Keep llm-wiki artifacts updated via `knowledge-sync` and `knowledge-link` (pages/chunks/entities/edges/evidence/revisions).
 
 ## Execution notes
 - Default config file is `config/skill_config.json`.
 - If config does not exist, copy from `config/skill_config.template.json` and run setup.
 - Keep API key only in config/local secure storage; never hardcode in prompts.
+- When users ask for "措施建议/历史措施", do not rely on `type=7` measures only. Always check related `description` text in tasks/problems for embedded actions, temporary containment, and final fix notes.
 - For cross-model portability, prefer returning:
   - concise human summary in plain text
   - optional raw JSON block when requested

@@ -32,6 +32,9 @@ Output control options (json mode):
 Read tasks:
 `run.ps1 -Intent read -Entity tasks -Output table`
 
+Read full task payload (including `raw.description`) for measure extraction:
+`run.ps1 -Intent read -Entity tasks -Output json -MaxOutputChars 50000`
+
 Create problem:
 `run.ps1 -Intent write -Type problem -Subject "sensor issue" -Responsible "uio1sgh" -DueDate "2026-05-20"`
 
@@ -51,6 +54,12 @@ Knowledge analysis:
 `run.ps1 -Intent analyze -Query "sensor failure" -Top 5 -Output table`
 `run.ps1 -Intent analyze -Query "sensor failure" -Top 5 -Output json`
 `run.ps1 -Intent analyze -Query "sensor failure" -Top 5 -Output markdown`
+
+Important for measure recommendation quality:
+- Many OPL teams record containment/fix actions in `description` of problem/task entries instead of creating explicit `type=7` measure records.
+- Therefore, when answering "what measures were used" or "suggest measures", combine:
+  1) explicit measures (`type=7`) and confirmed/inferred links,
+  2) action evidence parsed from related problem/task `description` fields.
 
 Machine-friendly JSON envelope examples:
 - `run.ps1 -Intent track -Protocol json`
