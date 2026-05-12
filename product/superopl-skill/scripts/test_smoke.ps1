@@ -82,9 +82,11 @@ $cases = @(
     [PSCustomObject]@{ name='read success'; intent='read'; args=@{ Entity='tasks'; Output='table' }; expectSuccess=$true; expectedErrorCode='' },
     [PSCustomObject]@{ name='track success'; intent='track'; args=@{}; expectSuccess=$true; expectedErrorCode='' },
     [PSCustomObject]@{ name='knowledge-sync success'; intent='knowledge-sync'; args=@{}; expectSuccess=$true; expectedErrorCode='' },
+    [PSCustomObject]@{ name='knowledge-confirm list success'; intent='knowledge-confirm'; args=@{ Action='list' }; expectSuccess=$true; expectedErrorCode='' },
     [PSCustomObject]@{ name='analyze success'; intent='analyze'; args=@{ Query='opl' }; expectSuccess=$true; expectedErrorCode='' },
 
     [PSCustomObject]@{ name='analyze missing query'; intent='analyze'; args=@{}; expectSuccess=$false; expectedErrorCode='validation_error' },
+    [PSCustomObject]@{ name='knowledge-confirm add missing ids'; intent='knowledge-confirm'; args=@{ Action='add' }; expectSuccess=$false; expectedErrorCode='validation_error' },
     [PSCustomObject]@{ name='write missing subject'; intent='write'; args=@{ Responsible='uio1sgh' }; expectSuccess=$false; expectedErrorCode='validation_error' },
     [PSCustomObject]@{ name='delete missing taskid'; intent='delete'; args=@{}; expectSuccess=$false; expectedErrorCode='validation_error' }
 )

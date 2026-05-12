@@ -28,6 +28,11 @@ This schema is file-based (JSON/JSONL/Markdown), no DB required.
   - `same_responsible` (sync-time baseline relation)
   - `problem_measure` (inferred in knowledge-link)
 
+### confirmed_links
+- human-confirmed problem->measure relations (priority over inferred)
+- file: `knowledge_base/wiki/confirmed_links.json`
+- fields: `link_id, relation, problem_id, measure_id, source_entity_id, target_entity_id, confirmed, confirmed_by, note, confirmed_at, updated_at`
+
 ### evidence
 - traceability records from raw OPL facts and inferred links
 - file: `knowledge_base/wiki/evidence.json`
@@ -45,5 +50,8 @@ This schema is file-based (JSON/JSONL/Markdown), no DB required.
 - `opl_knowledge_link.ps1`
   - infers problem->measure links
   - writes to legacy links + wiki edges/evidence
+- `opl_knowledge_confirm.ps1`
+  - add/remove/list human-confirmed Problem-Measure links
 - `opl_analyze.ps1`
   - reads both legacy stats and wiki artifacts for analysis output
+  - prioritizes confirmed links, then falls back to inferred links

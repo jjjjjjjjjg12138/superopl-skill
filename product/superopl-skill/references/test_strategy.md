@@ -14,8 +14,10 @@ Current cases:
 - read success
 - track success
 - knowledge-sync success
+- knowledge-confirm list success
 - analyze success
 - analyze missing query (validation_error)
+- knowledge-confirm add missing ids (validation_error)
 - write missing subject (validation_error)
 - delete missing taskid (validation_error)
 

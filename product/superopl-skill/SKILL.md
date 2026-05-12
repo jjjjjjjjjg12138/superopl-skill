@@ -22,7 +22,9 @@ Keep behavior model-agnostic so the skill can be reused by different LLM agents:
 8. Use `scripts/run.ps1 -Intent knowledge-sync` for deduplicated knowledge snapshot and frequency rebuild.
 9. Use `scripts/run.ps1 -Intent knowledge-link` to infer Problem-Measure links.
 10. Use `scripts/run.ps1 -Intent knowledge-search` or `scripts/run.ps1 -Intent analyze` for historical analysis and recall (frequency + related measures + evidence trace).
-11. Keep llm-wiki artifacts updated via `knowledge-sync` and `knowledge-link` (pages/chunks/entities/edges/evidence/revisions).
+11. Use `scripts/run.ps1 -Intent knowledge-confirm` to add/remove/list manually confirmed Problem-Measure links.
+12. Use `scripts/run.ps1 -Intent analyze -Output table|json|markdown` based on downstream consumption (human read vs model chaining vs wiki writing).
+13. Keep llm-wiki artifacts updated via `knowledge-sync` and `knowledge-link` (pages/chunks/entities/edges/evidence/revisions).
 
 ## Execution notes
 - Default config file is `config/skill_config.json`.

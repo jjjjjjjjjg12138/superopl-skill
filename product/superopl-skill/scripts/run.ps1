@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('setup','read','write','edit','delete','track','report','knowledge-sync','knowledge-link','knowledge-search','analyze')]
+    [ValidateSet('setup','read','write','edit','delete','track','report','knowledge-sync','knowledge-link','knowledge-search','knowledge-confirm','analyze')]
     [string]$Intent,
 
     [ValidateSet('json','raw')]
@@ -40,6 +40,12 @@ param(
     [int]$UpcomingDays,
     [int]$RecentClosedDays,
     [int]$DayWindow,
+
+    [ValidateSet('add','remove','list')]
+    [string]$Action,
+    [string]$ProblemId,
+    [string]$MeasureId,
+    [string]$Note,
 
     [int]$MaxOutputLines = 120,
     [int]$MaxOutputChars = 8000
@@ -290,12 +296,21 @@ try {
             Add-IfPresent -Map $p -Key 'Query' -Value $Query
             Add-IfPositiveInt -Map $p -Key 'Top' -Value $Top
         }
+        'knowledge-confirm' {
+            $scriptName = 'opl_knowledge_confirm.ps1'
+            $p = @{} + $common
+            Add-IfPresent -Map $p -Key 'Action' -Value $Action
+            Add-IfPresent -Map $p -Key 'ProblemId' -Value $ProblemId
+            Add-IfPresent -Map $p -Key 'MeasureId' -Value $MeasureId
+            Add-IfPresent -Map $p -Key 'Note' -Value $Note
+        }
         'analyze' {
             if (-not $Query) { throw 'analyze intent requires -Query' }
             $scriptName = 'opl_analyze.ps1'
             $p = @{} + $common
             Add-IfPresent -Map $p -Key 'Query' -Value $Query
             Add-IfPositiveInt -Map $p -Key 'Top' -Value $Top
+            Add-IfPresent -Map $p -Key 'Output' -Value $Output
         }
     }
 

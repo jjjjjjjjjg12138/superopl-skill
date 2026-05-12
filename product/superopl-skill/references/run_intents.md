@@ -24,6 +24,7 @@ Output control options (json mode):
 - `knowledge-sync`
 - `knowledge-link`
 - `knowledge-search`
+- `knowledge-confirm`
 - `analyze`
 
 ## Examples
@@ -46,7 +47,10 @@ Generate report:
 Knowledge analysis:
 `run.ps1 -Intent knowledge-sync`
 `run.ps1 -Intent knowledge-link -DayWindow 30`
-`run.ps1 -Intent analyze -Query "sensor failure" -Top 5`
+`run.ps1 -Intent knowledge-confirm -Action add -ProblemId 8761275 -MeasureId 8761303 -Note "confirmed by owner"`
+`run.ps1 -Intent analyze -Query "sensor failure" -Top 5 -Output table`
+`run.ps1 -Intent analyze -Query "sensor failure" -Top 5 -Output json`
+`run.ps1 -Intent analyze -Query "sensor failure" -Top 5 -Output markdown`
 
 Machine-friendly JSON envelope examples:
 - `run.ps1 -Intent track -Protocol json`
