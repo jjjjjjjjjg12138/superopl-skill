@@ -1,10 +1,10 @@
-# Secrets
-product/superopl-skill/config/skill_config.json
+# Secrets - never commit API keys or personal config
+**/skill_config.json
 
 # Generated runtime artifacts
-product/superopl-skill/test-results/
-product/superopl-skill/knowledge_base/
-product/release/superopl-skill-stage/
+**/test-results/
+**/knowledge_base/
+**/release/superopl-skill-stage/
 
 # Local/editor
 *.log

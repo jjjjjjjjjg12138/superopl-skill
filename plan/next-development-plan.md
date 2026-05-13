@@ -28,59 +28,30 @@
 
 ---
 
-## 3. v2.1 工作包与里程碑
+## 3. v2.1 工作包与里程碑（修订后）
 
-### WP1：回归测试与质量门禁（优先级 P0，预计 1-2 天）
+### WP1：回归测试与质量门禁 ✅ 已完成（2026-05-12）
 
-交付内容：
-- 新增 `scripts/test_smoke.ps1`（最小回归）
-- 覆盖每个 intent 至少 1 个成功用例 + 1 个失败用例（参数校验类）
-- 产出 `product/superopl-skill/test-results/smoke-<date>.json`
-
-验收标准：
-- 所有 P0 用例通过
-- 失败用例返回统一错误结构，且 code 正确
-
-### WP2：错误映射增强（优先级 P0，预计 0.5-1 天）
+### WP2：错误映射增强（优先级 P0，待执行）
 
 交付内容：
-- 在 `run.ps1` 增加 API 错误细分（示例：401/403/406/5xx）
+- 在 `run.ps1` 增加 API 错误细分（401/403/406/5xx）
 - 统一 errors 字段扩展：`code`, `message`, `hint`, `source`
 
-验收标准：
-- 常见 API 失败场景可返回可读 hint（例如 key 无效、loginUser 无效）
+### WP3：关系确认层 ⛔ 暂停
 
-### WP3：关系确认层（优先级 P1，预计 1-2 天）
+原计划依赖本地知识库（confirmed_links.json），但 knowledge-sync 已确认不可用。
+knowledge-confirm 存储的内容目前没有任何地方消费，暂停实现。
+若未来 API 支持分页或数据量减少，可重新评估。
 
-交付内容：
-- 新增 `knowledge_base/wiki/confirmed_links.json`
-- 新增脚本：`scripts/opl_knowledge_confirm.ps1`
-  - 支持确认/撤销 Problem-Measure 关系
-- `opl_analyze.ps1` 优先读取 confirmed links，再回退推断 links
+### WP4：分析输出模式升级 ✅ 已完成（2026-05-13，随 WP-B 一并交付）
 
-验收标准：
-- 同一 query 下，确认关系优先展示
-- 推断关系仍可作为候选保留
-
-### WP4：分析输出模式升级（优先级 P1，预计 1 天）
+### WP5：发布与交付（优先级 P0，待执行）
 
 交付内容：
-- `opl_analyze.ps1` 增加 `-Output json|table|markdown`
-- `run.ps1` 透传并在 JSON envelope 中稳定承载 `parsed_json`
-
-验收标准：
-- `-Output markdown` 可直接写入 wiki
-- `-Output json` 可被多模型编排稳定消费
-
-### WP5：发布与交付（优先级 P0，预计 0.5 天）
-
-交付内容：
-- 打包 skill（最终发布包）
-- 生成验收清单（功能、接口、错误、回归）
-- 版本说明：v2.1 release notes
-
-验收标准：
-- 可复制到新环境，按一份文档完成 setup 和 smoke test
+- 更新发布包（含本次架构修正）
+- 更新验收清单 v2.2
+- 更新 release notes v2.2
 
 ---
 
@@ -99,6 +70,4 @@
 
 ## 5. 下一步执行顺序（建议）
 
-先做 WP1（回归）+ WP2（错误映射），再做 WP3（确认层）+ WP4（输出模式），最后 WP5（发布）。
-
-这样可以先稳住底盘，再提升分析可信度和交付体验。
+先做 WP2（错误映射），再做 WP5（发布 v2.2）。WP3 暂停，WP1/WP4 已完成。

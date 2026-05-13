@@ -11,16 +11,17 @@ Default to JSON protocol for model orchestration. Use raw output only when human
 
 ## Core workflow
 1. Use `scripts/run.sh --intent setup` when config is missing or user asks to switch OPL/profile.
-2. Use `scripts/run.sh --intent read` for data retrieval and filtering.
-3. Use `scripts/run.sh --intent write` to create entries.
-4. Use `scripts/run.sh --intent edit` to update status, due date, owner/responsible, or subject.
-5. Use `scripts/run.sh --intent delete` to delete a task when explicitly requested.
-6. Use `scripts/run.sh --intent track` for overdue/upcoming tracking.
-7. Use `scripts/run.sh --intent report` to generate Markdown status report.
-8. Use `scripts/run.sh --intent knowledge-sync` for deduplicated knowledge snapshot and frequency rebuild.
-9. Use `scripts/run.sh --intent knowledge-link` to infer Problem-Measure links.
-10. Use `scripts/run.sh --intent knowledge-search` or `scripts/run.sh --intent analyze` for historical analysis and recall.
-11. Before suggesting measures, inspect related task/problem `description` fields because many teams write containment/action details there instead of creating separate measure entries.
+2. Use `scripts/run.sh --intent read` for structured data retrieval and filtering.
+3. Use `scripts/run.sh --intent query` for keyword/type/responsible-based live search (no local index needed).
+4. Use `scripts/run.sh --intent write` to create entries.
+5. Use `scripts/run.sh --intent edit` to update status, due date, owner/responsible, or subject.
+6. Use `scripts/run.sh --intent delete` to delete a task when explicitly requested.
+7. Use `scripts/run.sh --intent track` for overdue/upcoming tracking.
+8. Use `scripts/run.sh --intent report` to generate Markdown status report.
+9. Use `scripts/run.sh --intent analyze` for live historical analysis (frequency, related problems/measures). Does NOT require any prior sync step.
+10. Before suggesting measures, inspect related task/problem `description` fields because many teams write containment/action details there instead of creating separate measure entries.
+
+> ⚠️ `knowledge-sync`, `knowledge-link`, `knowledge-search`, `knowledge-confirm` are suspended — they depend on a local knowledge base that cannot be reliably built due to API timeout on large OPLs. Do not use or recommend these intents.
 
 ## Execution notes
 - Default config file is `config/skill_config.json`.

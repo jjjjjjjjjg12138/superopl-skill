@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('setup','read','write','edit','delete','track','report','knowledge-sync','knowledge-link','knowledge-search','knowledge-confirm','analyze')]
+    [ValidateSet('setup','read','write','edit','delete','track','report','query','analyze','knowledge-sync','knowledge-link','knowledge-search','knowledge-confirm')]
     [string]$Intent,
 
     [ValidateSet('json','raw')]
@@ -303,6 +303,17 @@ try {
             Add-IfPresent -Map $p -Key 'ProblemId' -Value $ProblemId
             Add-IfPresent -Map $p -Key 'MeasureId' -Value $MeasureId
             Add-IfPresent -Map $p -Key 'Note' -Value $Note
+        }
+        'query' {
+            $scriptName = 'opl_query.ps1'
+            $p = @{} + $common
+            Add-IfPresent -Map $p -Key 'Keywords' -Value $Query
+            Add-IfPresent -Map $p -Key 'Type' -Value $Type
+            Add-IfPresent -Map $p -Key 'Responsible' -Value $Responsible
+            Add-IfPresent -Map $p -Key 'Status' -Value $Status
+            Add-IfPresent -Map $p -Key 'TaskId' -Value $TaskId
+            Add-IfPresent -Map $p -Key 'Output' -Value $Output
+            Add-IfPositiveInt -Map $p -Key 'Top' -Value $Top
         }
         'analyze' {
             if (-not $Query) { throw 'analyze intent requires -Query' }
